@@ -9,9 +9,10 @@ from rest_framework import viewsets
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from fitnessClub.serializers import (ClientSerializer, TrainerSerializer, ClassSerializer,
-    MembershipSerializer, SubscriptionSerializer, IndividualTrainingSerializer
-)
+from fitnessClub.serializers import (
+    ClientSerializer, TrainerSerializer, ClassSerializer,
+    MembershipSerializer, SubscriptionSerializer, IndividualTrainingSerializer,
+    )
 
 
 def client_list(request):
@@ -142,7 +143,7 @@ def book_session(request):
                 new_session = IndividualTraining(user=user, date=date, time=time)
                 new_session.save()
                 data_msg = {
-                'message': 'Вы успешно записались!',
+                    'message': 'Вы успешно записались!',
                 }
                 return render(request, 'calendar.html', data_msg)
     else:
