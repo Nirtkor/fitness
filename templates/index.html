@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @keyframes loading {
+      0% {width: 0%;}
+      100% {width: 100%;}
+    }
+  </style>
+  <title>Фитнесс клуб "Бодрая корова"</title>
+  <style>
+  body {
+   margin: 0;
+   padding: 0;
+   font-family: 'Press Start 2P', cursive;
+   background-color: #212121; 
+   color: #f1f1f1;
+   overflow-x: hidden;
+   text-align: center;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #313131;
+    padding: 10px;
+  }
+
+  .navbar a {
+    color: #f1f1f1;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+
+  .navbar i {
+    margin-right: 8px;
+  }
+
+  .news {
+    border-top: 1px solid #ff69b4; 
+    padding: 10px;
+    margin: 20px 0;
+  }
+
+  .news-time {
+    font-size: 14px;
+    color: #ff69b4; 
+  }
+
+  .news-title {
+    font-size: 16px;
+    color: #f1f1f1; 
+    margin: 0 0 5px 0;
+  }
+
+  .news-content {
+    font-size: 12px; 
+    color: #999; 
+    line-height: 1.3;
+  }
+
+  .section {
+    padding: 20px;
+    margin: 20px 0;
+    position: relative;
+  }
+
+  .title {
+    font-size: 20px;
+    color: #f1f1f1;
+    margin-bottom: 10px;
+  }
+
+  .photo img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin: 10px;
+  }
+
+  #loading-screen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #212121;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #loading-bar {
+    width: 0%;
+    background: #f1f1f1;
+    height: 20px;
+    border: 1px solid #fff;
+    animation: loading 3s linear forwards;
+  }
+
+  @keyframes loading {
+    0% {width: 0%}
+    100% {width: 100%}
+  }
+
+  .calculator {
+    margin: 20px auto;
+    max-width: 280px;
+    padding: 10px;
+    border: 3px solid #f1f1f1;
+    border-radius: 10px;
+    background: #313131;
+  }
+
+  .calculator input[type="number"]{ 
+    height: 30px;
+    width: 60%;
+    border: none;
+    background: #f1f1f1;
+    margin: 10px auto;
+    padding: 0 10px;
+    color: #000;
+    font-family: 'Press Start 2P', cursive;
+  }
+
+  .calculator button {
+    background-color: #ff69b4;
+    color: #212121;
+    font-size: 14px;
+    padding: 10px;
+    border: none;
+  }
+  
+  .calculator button:hover {
+    background-color: #f1f1f1;
+    color: #212121;
+  }
+  
+  .loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #212121;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+  
+  .loading-bar-outer {
+    width: 80%;
+    height: 20px;
+    border: 2px solid #f1f1f1;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: black;
+  }
+  
+  .loading-bar-inner {
+    height: 100%;
+    background-color: #ff69b4;
+    animation: loading 3s forwards;
+  }
+  
+  .hide {
+    animation: fadeOut 1s forwards;
+  }
+  
+  @keyframes fadeOut {
+    100% {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  .sprite {
+    width: 90px;
+    animation: sprite-animation 1s steps(10) infinite;
+  }
+
+  @keyframes sprite-animation {
+    100% {
+      background-position: -900px;
+    }
+  }
+
+  .sprite-left {
+    position: absolute;
+    left: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .sprite-right {
+    position: absolute;
+    right: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .promo {
+    position: relative;
+    background-color: #313131;
+    padding: 20px;
+    margin: 20px 0;
+    color: #fff;
+  }
+
+  .promo h2 {
+    margin: 0;
+    font-size: 22px;
+  }
+
+  .promo p {
+    margin: 10px 0;
+  }
+
+  .promo a {
+    display: inline-block;
+    color: #ff69b4;
+    border: 1px solid #ff69b4;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: 0.5s;
+  }
+
+  .promo a:hover {
+    background-color: #ff69b4;
+    color: #000;
+  }
+
+  .promo::before,
+  .promo::after {
+    content: '';
+    position: absolute;
+    background: url('sprite-left.png');
+    width: 90px;
+    height: 90px;
+  }
+
+  .promo::before {
+    top: -45px;
+    left: -45px;
+    animation: sprite-animation 3s steps(30) infinite;
+  }
+
+  .promo::after {
+    top: -45px;
+    right: -45px;
+    animation: sprite-animation 3s steps(30) infinite reverse;
+  }
+
+  .article {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .article-item {
+    margin: 20px;
+    width: calc(50% - 40px);
+    color: #fff;
+    background-color: #313131;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    transition: 0.5s;
+  }
+  
+  .article-item:hover {
+    box-shadow: 0px 0px 20px rgba(255, 105, 180, 0.5);
+  }
+
+  .article-item h3 {
+    margin: 0;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .article-item p {
+    margin: 0;
+  }
+
+  .info-box {
+    color: #fff;
+    background-color: #313131;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    transition: .5s;
+    margin: 20px;
+  }
+  
+  .info-box:hover {
+    box-shadow: 0px 0px 20px rgba(255, 105, 180, 0.5);
+  }
+  
+  .info-box h2 {
+    color: #ff69b4;
+  }
+  
+  .info-box p {
+    margin-bottom: 0;
+  }
+  
+  .info-box .fa {
+    font-size: 50px;
+    margin-bottom: 20px;
+  }
+  </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="loading-screen" id="loading-screen">
+  <div class="loading-bar-outer">
+    <div class="loading-bar-inner"></div>
+  </div>
+</div>
+<div class="navbar">
+  <a href="http://127.0.0.1:8000/main/"><i class="fas fa-home"></i>Главная</a>
+  <a href="http://127.0.0.1:8000/calendar/"><i class="fas fa-pen"></i>Записаться</a>
+  <a href="http://127.0.0.1:8000/contacts/"><i class="fas fa-phone"></i>Контакты</a>
+  <a href="http://127.0.0.1:8000/lk/"><i class="fas fa-user"></i>Личный кабинет</a>
+</div>
+
+<div class="container">
+
+<section class="promo">
+  <h2>Добро пожаловать в "Бодрая корова"!</h2>
+  <p>Первый посетитель каждого месяца получает годовой абонемент абсолютно бесплатно!</p>
+  <a href="#">Cогласны изменить своё тело в лучшую сторону? Чтож, звоните +7-911-123-45-67</a>
+</section>
+
+<section id="fee-calculator" class="section">
+  <h2 class="title">Калькулятор стоимости занятий</h2>
+  <div class="calculator">
+    <h3>Введите количество обычных занятий:</h3>
+    <input type="number" id="classesRegular" min="1">
+    <h3>Введите количество занятий с тренером:</h3>
+    <input type="number" id="classesTrainer" min="1">
+    <button onclick="calculate()">Рассчитать стоимость</button>
+    <h3>Итоговая стоимость:</h3>
+    <p id="total"></p>
+    <p id="error" style="color: red;"></p>
+  </div>
+</section>
+
+<section id="what-we-offer" class="section">
+  <h2 class="title">Мы предлагаем</h2>
+  <p>Возьми ситуацию под контролем! Прокачай свои мышцы и почувствуй себя суперзвездой в нашем фитнес клубе "Бодрая корова"! От йоги до силовых тренировок – мы тут, чтобы сделать тебя бессмертным.</p>
+</section>
+
+<section class="article">
+  <div class="article-item">
+    <h3>Зачем нужна утренняя зарядка?</h3>
+    <p>Узнайте, как ежедневная утренняя зарядка помогает поддерживать здоровье и бодрость на протяжении всего дня.</p>
+  </div>
+  <div class="article-item">
+    <h3>Как правильно делать упражнения?</h3>
+    <p>Подробное руководство о том, как проводить тренировки для достижения максимальных результатов.</p>
+  </div>
+</section>
+
+  <section id="about" class="section">
+    <h2 class="title">О клубе</h2>
+    <p>Здесь нет места для слабаков. Наша миссия - вернуть радость от тренировок, помочь тебе стать сильнее, крепче, ловче. Поднимай штангу, тренируйся с лучшими, чувствуй себя как дома в нашем супер-клубе.</p>
+  </section>
+
+  <div class="info-box">
+    <i class="fas fa-map-marker-alt"></i>
+    <h2>Наш адрес</h2>
+    <p>123456, г. Москва, ул. Победы, д. 1</p>
+  </div>
+
+  <section id="news" class="news"></section>
+
+  <script>
+    setTimeout(function() {
+      document.getElementById('loading-screen').classList.add('hide');
+    }, 3000);
+    
+    function calculate() {
+      var classesRegular = document.getElementById('classesRegular').value;
+      var classesTrainer = document.getElementById('classesTrainer').value;
+      var priceRegular = 500; 
+      var priceTrainer = 1000;
+  
+      if (!validNumber(classesRegular) || !validNumber(classesTrainer)) {
+        alert('Данные не валидны, введите целочисленное положительное значение');
+        return;
+      }
+  
+      var total = (classesRegular * priceRegular) + (classesTrainer * priceTrainer);
+      document.getElementById('total').innerText = total + " руб.";
+      document.getElementById('error-message').innerText = '';
+    }
+  
+    function validNumber(num) {
+      return num && num >= 0 && !isNaN(num);
+    }
+  </script>
+</div>
+</body>
+</html>

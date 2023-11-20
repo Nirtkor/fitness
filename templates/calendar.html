@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Календарь записи на персональные тренировки</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Press Start 2P', cursive;
+            background-color: #212121;
+            color: #f1f1f1;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        .navbar a {
+            color: #f1f1f1;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+            margin-left: 15px;
+            padding-bottom: 20px;
+        }
+
+        .navbar i {
+            margin-right: 8px;
+        }
+
+        .calendar {
+            width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #313131;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            transition: 0.5s;
+        }
+
+        .calendar:hover {
+            box-shadow: 0px 0px 20px rgba(255, 105, 180, 0.5);
+        }
+
+        .calendar table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #f1f1f1;
+        }
+
+        .calendar th,
+        .calendar td {
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: center;
+            color: #f1f1f1;
+        }
+
+        .calendar th {
+            background-color: #434343;
+        }
+
+        .calendar td.available {
+            background-color: #ff69b4;
+            color: #212121;
+            cursor: pointer;
+        }
+
+        .calendar td.booked {
+            background-color: #f8d7da;
+            color: #212121;
+        }
+
+        .controls {
+            color: #f1f1f1;
+            margin-bottom: 15px;
+        }
+
+        .controls select {
+            height: 30px;
+            width: 60%;
+            border: none;
+            background: #f1f1f1;
+            margin: 10px auto;
+            padding: 0 10px;
+            color: #000;
+            font-family: 'Press Start 2P', cursive;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="http://127.0.0.1:8000/main/#"><i class="fas fa-home"></i>Домой</a>
+        <a href="http://127.0.0.1:8000/lk"><i class="fas fa-user"></i>Ваш профиль</a>
+    </div>
+    
+    <div class="calendar">
+        <h2>Запись на персональную тренировку</h2>
+        <form method="POST" id="bookingForm" action="{% url 'book_session' %}">
+            {% csrf_token %}
+            <div class="controls">
+                <h3>Выберите дату и время</h3>
+                <select id="day" name="day">
+
+                </select>
+                <select id="time" name="time">
+
+                </select>
+            </div>
+            <table>
+
+            </table>
+            <button type="submit">Записаться</button>
+        </form>
+    </div>
+
+    <script>
+        window.onload = function() {
+            let dataMsg = '{{ message|escapejs }}';
+            if (dataMsg) {
+                alert(dataMsg);
+            }
+    
+            let daySelect = document.getElementById('day');
+            let timeSelect = document.getElementById('time');
+            for(let i = 0; i < 7; i++) {
+                let date = new Date();
+                date.setDate(date.getDate() + i);
+                let option = document.createElement('option');
+                option.value = date.toISOString().substring(0,10);
+                option.textContent = option.value;
+                daySelect.appendChild(option);
+            }
+            let timeSlots = ['09:00', '12:00', '15:00', '18:00'];
+            for(let time of timeSlots) {
+                let option = document.createElement('option');
+                option.value = time;
+                option.textContent = time;
+                timeSelect.appendChild(option);
+            }
+        }
+        function bookSession() {
+            let day = document.getElementById('day').value;
+            let time = document.getElementById('time').value;
+            if(!day || !time) {
+                alert('Пожалуйста, выберите дату и время.');
+                return;
+            }
+    
+            let xhr = new XMLHttpRequest();
+            let url = "{% url 'book_session' %}";
+    
+            let token = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('X-CSRFToken', token);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    alert(JSON.parse(xhr.responseText).message);
+                }
+            };
+            xhr.send(`day=${day}&time=${time}`);
+        }       
+      
+    </script>    
+</body>
+</html>
