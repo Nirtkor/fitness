@@ -3,4 +3,4 @@
 *__pycache__*
 *.idea*
 *.dbeaver*
-*db_init.sql*
+*.DS_Store*
