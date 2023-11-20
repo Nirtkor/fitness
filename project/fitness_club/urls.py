@@ -14,7 +14,7 @@ from .views import (
     contact_page,
     lk_page,
     login_view,
-    book_session
+    book_session,
 )
 
 router = DefaultRouter()
