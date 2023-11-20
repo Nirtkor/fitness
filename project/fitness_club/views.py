@@ -6,12 +6,12 @@ from django.contrib.auth import authenticate, login
 from django.views import View
 from django import forms
 from rest_framework import viewsets
-from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from fitnessClub.serializers import ClientSerializer, TrainerSerializer, ClassSerializer, \
+from fitnessClub.serializers import (ClientSerializer, TrainerSerializer, ClassSerializer,
     MembershipSerializer, SubscriptionSerializer, IndividualTrainingSerializer
+)
 
 
 def client_list(request):
@@ -105,6 +105,7 @@ class LoginForm(forms.Form):
     username = forms.CharField(label="Имя пользователя")
     password = forms.CharField(label="Пароль", widget=forms.PasswordInput)
 
+
 def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -113,13 +114,13 @@ def login_view(request):
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             if user is not None:
-                 login(request, user)
-                 return redirect("/lk/")
+                login(request, user)
+                return redirect("/lk/")
             else:
-                 messages.error(request, "Неправильный логин или пароль" )
+                messages.error(request, "Неправильный логин или пароль")
     else:
         form = LoginForm()
-        
+
     return render(request, 'login.html', {'form': form})
 
 
@@ -129,21 +130,21 @@ def book_session(request):
         if request.method == 'POST':
             date = request.POST['day']
             time = request.POST['time']
-            
+
             existing_sessions = IndividualTraining.objects.filter(user=user, date=date, time=time)
 
             if existing_sessions.exists():
-                data = {
-                    'message': 'У вас уже есть запись на эту дату и время.'
+                data_msg = {
+                    'message': 'У вас уже есть запись на эту дату и время',
                 }
-                return render(request, 'calendar.html', data)
+                return render(request, 'calendar.html', data_msg)
             else:
                 new_session = IndividualTraining(user=user, date=date, time=time)
                 new_session.save()
-                data = {
-                'message': 'Вы успешно записались!'
+                data_msg = {
+                'message': 'Вы успешно записались!',
                 }
-                return render(request, 'calendar.html', data)
+                return render(request, 'calendar.html', data_msg)
     else:
         return render(request, 'login.html')
 
@@ -152,25 +153,31 @@ class ClientView(viewsets.ModelViewSet):
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
 
+
 class TrainerView(viewsets.ModelViewSet):
     queryset = Trainer.objects.all()
     serializer_class = TrainerSerializer
+
 
 class ClassView(viewsets.ModelViewSet):
     queryset = Class.objects.all()
     serializer_class = ClassSerializer
 
+
 class MembershipView(viewsets.ModelViewSet):
     queryset = Membership.objects.all()
     serializer_class = MembershipSerializer
+
 
 class SubscriptionView(viewsets.ModelViewSet):
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
 
+
 class IndividualTrainingView(viewsets.ModelViewSet):
     queryset = IndividualTraining.objects.all()
     serializer_class = IndividualTrainingSerializer
+
 
 @method_decorator(csrf_exempt, name='dispatch')
 class IndividualTrainingDeleteView(View):
