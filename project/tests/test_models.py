@@ -39,7 +39,7 @@ class ModelsTest(TestCase):
             cost=100,
         )
         self.assertEqual(membership.client, client)
-        self.assertEqual(membership.cost, 100.00)
+        self.assertEqual(membership.cost, 100)
 
     def test_subscription_model(self):
         client = Client.objects.create(name='Test Client', address='Test Address', phone='1234567890')

@@ -5,6 +5,7 @@ from rest_framework.test import APIClient
 from fitnessClub.models import Client
 from django.urls import reverse
 
+
 class ClientViewTest(TestCase):
     def setUp(self):
         self.client_instance = Client.objects.create(name='Test Client', address='Test Address', phone='1234567890')
@@ -28,16 +29,13 @@ class ClientViewTest(TestCase):
         with self.assertRaises(Client.DoesNotExist):
             Client.objects.get(client_id=self.client_instance.client_id)
 
-
     def test_main_page_view(self):
         response = self.client.get(reverse('main-page'))
         self.assertEqual(response.status_code, 200)
-
 
     def test_calendar_page_view_authenticated(self):
         response = self.client.get(reverse('calendar-page'))
         self.assertEqual(response.status_code, 200)
 
-
     def tearDown(self):
-         self.client.logout()
+        self.client.logout()
