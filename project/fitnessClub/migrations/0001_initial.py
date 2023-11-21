@@ -83,7 +83,7 @@ class Migration(migrations.Migration):
             model_name="class",
             name="trainer",
             field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE, to="fitnessClub.trainer"
+                on_delete=django.db.models.deletion.CASCADE, to="fitnessClub.trainer",
             ),
         ),
     ]
