@@ -18,18 +18,36 @@ jobs:
       run: flake8 .
   tests:
     name: Тесты
+    
     runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: github_actions
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    
     steps:
       - uses: actions/checkout@v2
       - name: Установка Python
         uses: actions/setup-python@v2
         with:
           python-version: 3.11.0
-      - name: Установка зависимостей
+      - name: Install dependencies
         run: |
-          python3 -m pip install --upgrade pip
-          pip3 install Django==4.2.1 djangorestframework==3.14.0 psycopg2-binary==2.9.6
-      - name: Тесты django
-        run: |
-          python3 project/manage.py test tests.test_models
-          python3 project/manage.py test tests.test_views      
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+            pip install pytest-django
+      - uses: harmon758/postgresql-action@v1
+        with:
+           postgresql version: '11'
+      - name: Run migrations
+        run: python manage.py migrate
+      - name: Run tests
+        run: python manage.py test
