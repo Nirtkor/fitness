@@ -31,4 +31,5 @@ jobs:
           pip3 install Django==4.2.1 djangorestframework==3.14.0 psycopg2-binary==2.9.6
       - name: Тесты django
         run: |
-          python3 project/manage.py test
+          python3 project/manage.py test tests.test_models
+          python3 project/manage.py test tests.test_views      
