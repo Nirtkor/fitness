@@ -47,9 +47,9 @@ jobs:
       - uses: harmon758/postgresql-action@v1
         with:
            postgresql version: '11'
+      - name: f*cking postgres
+        run: sudo netstat -nl | grep postgres
       - name: Run migrations
-        run: 
-          sudo netstat -nl | grep postgres
-          python project/manage.py migrate
+        run: python project/manage.py migrate
       - name: Run tests
         run: python project/manage.py test
