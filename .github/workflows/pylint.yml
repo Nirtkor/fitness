@@ -48,6 +48,8 @@ jobs:
         with:
            postgresql version: '11'
       - name: Run migrations
-        run: python project/manage.py migrate
+        run: 
+          sudo netstat -nl | grep postgres
+          python project/manage.py migrate
       - name: Run tests
         run: python project/manage.py test
