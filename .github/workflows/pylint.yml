@@ -28,7 +28,7 @@ jobs:
       - name: Установка зависимостей
         run: |
           python3 -m pip install --upgrade pip
-          pip3 install Django==4.2.1 djangorestframework==3.14.0
+          pip3 install Django==4.2.1 djangorestframework==3.14.0 psycopg2-binary==2.9.6
       - name: Тесты django
         run: |
           python3 project/manage.py test
