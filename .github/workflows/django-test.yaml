@@ -68,7 +68,7 @@ jobs:
           DB_PORT: ${{ env.POSTGRES_PORT }}
         run: |
             sudo apt install postgresql postgresql-contrib
-            systemctl status postgresql
+            sudo systemctl start postgresql
             PGPASSWORD=admin psql -U admin -d postgres -h localhost -p 38790 -a -f db_init.sql
             \q
             python3 manage.py makemigrations
