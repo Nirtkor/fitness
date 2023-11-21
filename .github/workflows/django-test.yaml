@@ -22,7 +22,7 @@ jobs:
     env:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
-      POSTGRES_HOST: localhost # default host value for the database
+      POSTGRES_HOST: 0.0.0.0 # default host value for the database
       POSTGRES_DB: postgres
       POSTGRES_PORT: 38790
       DJANGO_SECRET_KEY: django-insecure-nhxo)q@jg95_r^%v#*cuhh%7pd#en$7%4(5vv!460q_i(k8)dw
@@ -34,7 +34,7 @@ jobs:
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ env.POSTGRES_DB }}
         ports:
-          - 127.0.0.1:38790
+          - 38790:38790
         options: >-
           --health-cmd pg_isready 
           --health-interval 10s 
