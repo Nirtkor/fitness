@@ -30,4 +30,7 @@ jobs:
           pip3 install Django==4.2.1
       - name: Тесты django
         run: |
-          python3 project/manage.py test
+          ls
+          pwd
+          cd project
+          python3 manage.py test
