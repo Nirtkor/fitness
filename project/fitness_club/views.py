@@ -81,6 +81,10 @@ def subscription_list(request):
     subscriptions = Subscription.objects.all()
     return render(request, 'subscription_list.html', {'subscriptions': subscriptions})
 
+class IndividualTrainingViewSet(viewsets.ModelViewSet):
+    queryset = IndividualTraining.objects.all()
+    serializer_class = IndividualTrainingSerializer
+
 
 def main_page(request):
     return render(request, 'index.html')

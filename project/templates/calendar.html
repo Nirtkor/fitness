@@ -98,6 +98,7 @@
     
     <div class="calendar">
         <h2>Запись на персональную тренировку</h2>
+        
         <form method="POST" id="bookingForm" action="{% url 'book_session' %}">
             {% csrf_token %}
             <div class="controls">
@@ -113,6 +114,7 @@
 
             </table>
             <button type="submit">Записаться</button>
+            <h4>Чтобы приобрести абонемент, или записаться на неделю вперед, звоните менеджеру</h4>
         </form>
     </div>
 
