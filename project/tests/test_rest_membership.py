@@ -3,8 +3,9 @@ from rest_framework.authtoken.models import Token
 from rest_framework import status
 from django.test import TestCase
 from rest_framework.test import APIClient
-from fitnessClub.models import Trainer, Membership, Client
+from fitnessClub.models import Membership, Client
 from fitnessClub.serializers import MembershipSerializer
+
 
 class MembershipViewSetTests(TestCase):
 
@@ -90,7 +91,6 @@ class MembershipViewSetTests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         membership.refresh_from_db()
         self.assertEqual(str(membership.end_date), '2023-12-30')  # Convert date to string for comparison
-
 
     def test_delete_membership(self):
         client = Client.objects.create(

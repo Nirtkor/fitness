@@ -3,8 +3,9 @@ from rest_framework.authtoken.models import Token
 from rest_framework import status
 from django.test import TestCase
 from rest_framework.test import APIClient
-from fitnessClub.models import Trainer, Membership, Client, Class, Subscription
+from fitnessClub.models import Trainer, Client, Class, Subscription
 from fitnessClub.serializers import SubscriptionSerializer
+
 
 class SubscriptionViewSetTests(TestCase):
 

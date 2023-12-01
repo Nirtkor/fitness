@@ -4,7 +4,6 @@ from rest_framework import status
 from django.test import TestCase
 from rest_framework.test import APIClient
 from fitnessClub.models import Client
-from fitnessClub.serializers import ClientSerializer
 
 
 class ClientViewSetTests(TestCase):
@@ -27,7 +26,7 @@ class ClientViewSetTests(TestCase):
         data = {
             'name': 'Test Client',
             'address': 'Test Address',
-            'phone': '1234567890'
+            'phone': '1234567890',
         }
         response = self.client.post('/clients/', data=data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -36,7 +35,7 @@ class ClientViewSetTests(TestCase):
         client = Client.objects.create(
             name='Test Client',
             address='Test Address',
-            phone='1234567890'
+            phone='1234567890',
         )
         response = self.client.get(f'/clients/{client.pk}/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -47,12 +46,12 @@ class ClientViewSetTests(TestCase):
         client = Client.objects.create(
             name='Test Client',
             address='Test Address',
-            phone='1234567890'
+            phone='1234567890',
         )
         data = {
             'name': 'Updated Client',
             'address': 'Updated Address',
-            'phone': '9876543210'
+            'phone': '9876543210',
         }
         response = self.client.put(f'/clients/{client.pk}/', data=data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -61,7 +60,7 @@ class ClientViewSetTests(TestCase):
         client = Client.objects.create(
             name='Test Client',
             address='Test Address',
-            phone='1234567890'
+            phone='1234567890',
         )
         data = {
             'address': 'Updated Address',
@@ -73,7 +72,7 @@ class ClientViewSetTests(TestCase):
         client = Client.objects.create(
             name='Test Client',
             address='Test Address',
-            phone='1234567890'
+            phone='1234567890',
         )
         response = self.client.delete(f'/clients/{client.pk}/')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)

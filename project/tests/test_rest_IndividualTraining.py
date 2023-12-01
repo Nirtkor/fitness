@@ -3,8 +3,9 @@ from rest_framework.authtoken.models import Token
 from rest_framework import status
 from django.test import TestCase
 from rest_framework.test import APIClient
-from fitnessClub.models import Client, Trainer, Class, Membership, Subscription, IndividualTraining
+from fitnessClub.models import Client, IndividualTraining
 from fitnessClub.serializers import IndividualTrainingSerializer
+
 
 class IndividualTrainingViewSetTests(TestCase):
 
@@ -23,11 +24,6 @@ class IndividualTrainingViewSetTests(TestCase):
         self.client.credentials(HTTP_AUTHORIZATION=f'Token {token.key}')
 
     def test_create_individual_training(self):
-        client = Client.objects.create(
-            name='Test Client',
-            address='Test Address',
-            phone='1234567890',
-        )
         data = {
             'user': self.user.id,
             'date': '2023-12-01',
