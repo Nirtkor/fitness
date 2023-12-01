@@ -4,7 +4,6 @@ from rest_framework import status
 from django.test import TestCase
 from rest_framework.test import APIClient
 from fitnessClub.models import Trainer
-from fitnessClub.serializers import TrainerSerializer
 
 
 class TrainerViewSetTests(TestCase):
