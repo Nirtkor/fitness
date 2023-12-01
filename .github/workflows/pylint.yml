@@ -54,6 +54,6 @@ jobs:
       - name: Wait for PostgreSQL to start
         run: sleep 10
       - name: Run migrations
-        run: python project/manage.py migrate
+        run: python3 project/manage.py migrate
       - name: Run tests
-        run: python project/manage.py test
+        run: python3 project/manage.py test
