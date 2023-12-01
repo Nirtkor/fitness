@@ -3,7 +3,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework import status
 from django.test import TestCase
 from rest_framework.test import APIClient
-from fitnessClub.models import Client, IndividualTraining
+from fitnessClub.models import IndividualTraining
 from fitnessClub.serializers import IndividualTrainingSerializer
 
 
