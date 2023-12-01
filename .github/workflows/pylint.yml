@@ -22,16 +22,15 @@ jobs:
     runs-on: ubuntu-latest
     
     services:
-      postgres:
-        image: postgres:latest
-        env:
-          ENGINE: 'django.db.backends.postgresql'
-          NAME: 'github_actions'
-          USER: postgres
-          POSTGRES_PASSWORD: postgres
-          HOST: '127.0.0.1'
-          PORT: '54320'
-          POSTGRES_HOST_AUTH_METHOD: 'trust'
+      postgresql:
+        image: postgres
+        env:         
+          POSTGRES_DB: 'postgres'
+          DB_CONNECTION: 'pgsql'
+          DB_HOST: 'postgresql'
+          DB_PORT: '5432'
+          DB_DATABASE: 'postgres'
+          DB_USERNAME: 'postgres'
         ports:
           - 54320:54320
         # needed because the postgres container does not provide a healthcheck
