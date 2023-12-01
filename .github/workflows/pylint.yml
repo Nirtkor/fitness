@@ -55,7 +55,5 @@ jobs:
         run: sleep 10
       - name: Run migrations
         run: python3 project/manage.py migrate
-      - name: Bruh
-        run: cd project
       - name: Run tests
-        run: python3 manage.py test tests.test_models
+        run: python3 project/manage.py test tests.test_models
