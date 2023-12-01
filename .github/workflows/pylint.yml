@@ -55,5 +55,19 @@ jobs:
         run: sleep 10
       - name: Run migrations
         run: python3 project/manage.py migrate
-      - name: Run tests
+      - name: Run tests (models)
         run: python3 project/manage.py test tests.test_models
+      - name: Run tests (class)
+        run: python3 project/manage.py test tests.test_rest_class
+      - name: Run tests (client)
+        run: python3 project/manage.py test tests.test_rest_client
+      - name: Run tests (IndividualTraining)
+        run: python3 project/manage.py test tests.test_rest_IndividualTraining
+      - name: Run tests (membership)
+        run: python3 project/manage.py test tests.test_rest_membership
+      - name: Run tests (subscription)
+        run: python3 project/manage.py test tests.test_rest_subscription
+      - name: Run tests (trainer)
+        run: python3 project/manage.py test tests.test_rest_trainer
+      - name: Run tests (views)
+        run: python3 project/manage.py test tests.test_views
