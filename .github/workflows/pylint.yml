@@ -28,9 +28,10 @@ jobs:
           ENGINE: 'django.db.backends.postgresql'
           NAME: 'github_actions'
           USER: postgres
-          PASSWORD: postgres
+          POSTGRES_PASSWORD: postgres
           HOST: '127.0.0.1'
           PORT: '54320'
+          POSTGRES_HOST_AUTH_METHOD: 'trust'
         ports:
           - 54320:54320
         # needed because the postgres container does not provide a healthcheck
