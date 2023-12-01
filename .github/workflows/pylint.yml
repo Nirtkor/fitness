@@ -27,7 +27,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: github_actions
+          POSTGRES_DB: postgres
         ports:
           - 54320:54320
         # needed because the postgres container does not provide a healthcheck
